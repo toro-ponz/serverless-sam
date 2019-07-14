@@ -69,7 +69,10 @@ describe("Running integration tests: ", () => {
             })
             .then(() => {
               console.log("export");
-              return exec("serverless sam export --output " + samFile, {cwd: repoFolder})
+              return exec("serverless sam export --output " + samFile, {
+                cwd: repoFolder,
+                region: "ap-northeast-1"
+              })
             })
             .then(() => {
               return new BbPromise((resolve, reject) => {
