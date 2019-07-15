@@ -13,39 +13,39 @@ const samTemplate = yaml.safeLoad(fs.readFileSync(__dirname + path.sep + ".." + 
 
 describe("Tests for " + __filename, () => {
     it("Imported the DynamoDB table resource", () => {
-      expect(samTemplate.Resources.TodosDynamoDbTable).to.not.be.null;
+      expect(samTemplate.Resources.ServerlessRestApiWithDynamodbDevTodosDynamoDbTable).to.not.be.null;
     });
 
     it("The table name is populated correct", () => {
-      expect(samTemplate.Resources.TodosDynamoDbTable.Properties.TableName).to.be.equal("serverless-rest-api-with-dynamodb-dev");
+      expect(samTemplate.Resources.ServerlessRestApiWithDynamodbDevTodosDynamoDbTable.Properties.TableName).to.be.equal("serverless-rest-api-with-dynamodb-dev");
     });
 
     it("Lambda functions were created correctly", () => {
-      expect(samTemplate.Resources.Create).to.not.be.null;
-      expect(samTemplate.Resources.Update).to.not.be.null;
-      expect(samTemplate.Resources.List).to.not.be.null;
-      expect(samTemplate.Resources.Get).to.not.be.null;
-      expect(samTemplate.Resources.Delete).to.not.be.null;
+      expect(samTemplate.Resources.ServerlessRestApiWithDynamodbDevCreate).to.not.be.null;
+      expect(samTemplate.Resources.ServerlessRestApiWithDynamodbDevUpdate).to.not.be.null;
+      expect(samTemplate.Resources.ServerlessRestApiWithDynamodbDevList).to.not.be.null;
+      expect(samTemplate.Resources.ServerlessRestApiWithDynamodbDevGet).to.not.be.null;
+      expect(samTemplate.Resources.ServerlessRestApiWithDynamodbDevDelete).to.not.be.null;
     });
 
     it("Lambda runtime is Node JS", () => {
-      let runtime = samTemplate.Resources.Create.Properties.Runtime;
+      let runtime = samTemplate.Resources.ServerlessRestApiWithDynamodbDevCreate.Properties.Runtime;
       assert(runtime.includes('nodejs6') || runtime.includes('nodejs4'), 'Version 4 & 6 of NodeJS');
     });
 
     it("Lambda execution policy was replicated in each function", () => {
-      const createPolicies = samTemplate.Resources.Create.Properties.Policies;
+      const createPolicies = samTemplate.Resources.ServerlessRestApiWithDynamodbDevCreate.Properties.Policies;
       expect(createPolicies).to.not.be.null;
       expect(createPolicies.length).to.be.equal(1);
-      expect(samTemplate.Resources.Update.Properties.Policies).to.deep.equal(createPolicies);
-      expect(samTemplate.Resources.List.Properties.Policies).to.deep.equal(createPolicies);
-      expect(samTemplate.Resources.Get.Properties.Policies).to.deep.equal(createPolicies);
-      expect(samTemplate.Resources.Delete.Properties.Policies).to.deep.equal(createPolicies);
+      expect(samTemplate.Resources.ServerlessRestApiWithDynamodbDevUpdate.Properties.Policies).to.deep.equal(createPolicies);
+      expect(samTemplate.Resources.ServerlessRestApiWithDynamodbDevList.Properties.Policies).to.deep.equal(createPolicies);
+      expect(samTemplate.Resources.ServerlessRestApiWithDynamodbDevGet.Properties.Policies).to.deep.equal(createPolicies);
+      expect(samTemplate.Resources.ServerlessRestApiWithDynamodbDevDelete.Properties.Policies).to.deep.equal(createPolicies);
     });
 
     it("Lambda function has environment variables", () => {
-      expect(samTemplate.Resources.Get.Properties.Environment.Variables["DYNAMODB_TABLE"]).to.not.be.null;
-      expect(samTemplate.Resources.Get.Properties.Environment.Variables["DYNAMODB_TABLE"]).to.be.equal("serverless-rest-api-with-dynamodb-dev");
+      expect(samTemplate.Resources.ServerlessRestApiWithDynamodbDevGet.Properties.Environment.Variables["DYNAMODB_TABLE"]).to.not.be.null;
+      expect(samTemplate.Resources.ServerlessRestApiWithDynamodbDevGet.Properties.Environment.Variables["DYNAMODB_TABLE"]).to.be.equal("serverless-rest-api-with-dynamodb-dev");
     });
 
     it("Rest API exists", () => {
