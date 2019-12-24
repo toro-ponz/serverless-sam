@@ -12,23 +12,23 @@ const samTemplate = yaml.safeLoad(fs.readFileSync(__dirname + path.sep + ".." + 
 
 describe("Tests for " + __filename, () => {
     it("Created the Lambda function resource", () => {
-      expect(samTemplate.Resources.LuckyNumber).to.not.be.null;
+      expect(samTemplate.Resources.AwsNodeAlexaSkillDevLuckyNumber).to.not.be.null;
     });
 
     it("Function runtime is node", () => {
-      expect(samTemplate.Resources.LuckyNumber.Properties.Runtime).to.be.equals("nodejs4.3");
+      expect(samTemplate.Resources.AwsNodeAlexaSkillDevLuckyNumber.Properties.Runtime).to.be.equals("nodejs8.10");
     });
 
     it("Code uri is a zip", () => {
-      expect(samTemplate.Resources.LuckyNumber.Properties.CodeUri.endsWith("aws-node-alexa-skill.zip")).to.be.true;
+      expect(samTemplate.Resources.AwsNodeAlexaSkillDevLuckyNumber.Properties.CodeUri.endsWith("aws-node-alexa-skill.zip")).to.be.true;
     });
 
     it("Function has one event", () => {
-      expect(Object.keys(samTemplate.Resources.LuckyNumber.Properties.Events).length).to.be.equals(1);
+      expect(Object.keys(samTemplate.Resources.AwsNodeAlexaSkillDevLuckyNumber.Properties.Events).length).to.be.equals(1);
     });
 
     it("Event type is AlexaSkill", () => {
-      expect(samTemplate.Resources.LuckyNumber.Properties.Events.Event1.Type).to.be.equals("AlexaSkill");
+      expect(samTemplate.Resources.AwsNodeAlexaSkillDevLuckyNumber.Properties.Events.Event1.Type).to.be.equals("AlexaSkill");
       
     });
 });

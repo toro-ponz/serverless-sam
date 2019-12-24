@@ -44,12 +44,17 @@ describe("Serverless plugin", () => {
 
   describe("Option validation", () => {
     it('Fails without output option', () => {
+      const fileName = './serverless.yml';
+      fs.writeFileSync(fileName, 'dummy file');
+
       plugin.validateOptions()
         .then(() => {
           chai.assert.fail("Did not throw error");
         }).catch((e) => {
           expect(e.message).to.be.equal(plugin.errorStrings.MissingOutputOption);
         });
+
+      fs.unlinkSync(fileName);
     });
 
     it('Fails without serverless.yml file', () => {
